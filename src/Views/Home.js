@@ -1,8 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import { Container, Content } from 'native-base';
-import StarRating from 'react-native-star-rating';
-import Icons from 'react-native-vector-icons/FontAwesome'
+import Icons from 'react-native-vector-icons/Entypo'
 let { height, width } = Dimensions.get('window');
 
 class Home extends React.Component {
@@ -14,120 +13,74 @@ class Home extends React.Component {
         this.state = {
             popularData: [
                 {
-                    img: require('../img/img3.jpg'),
-                    heading: 'CULTURE IN JAPAN'
+                    img: 'bookmarks',
+                    heading: 'BOOKMARKS'
                 },
                 {
-                    img: require('../img/image.jpeg'),
-                    heading: 'CULTURE IN JAPAN'
+                    img: 'bowl',
+                    heading: 'BOWL'
                 },
                 {
-                    img: require('../img/background.jpg'),
-                    heading: 'CULTURE IN JAPAN'
+                    img: 'calculator',
+                    heading: 'CALCULATOR'
                 },
                 {
-                    img: require('../img/img3.jpg'),
-                    heading: 'CULTURE IN JAPAN'
+                    img: 'box',
+                    heading: 'BOX'
+                },
+                {
+                    img: 'camera',
+                    heading: 'CAMERA'
+                },
+                {
+                    img: 'browser',
+                    heading: 'BROWSER'
+                },
+                {
+                    img: 'colours',
+                    heading: 'COLOURS'
+                },
+                {
+                    img: 'clipboard',
+                    heading: 'CLIPBOARD'
+                },
+                {
+                    img: 'clock',
+                    heading: 'CLOCK'
                 }
             ],
             starCount: 3.5
         }
     }
-    onStarRatingPress(rating) {
-        this.setState({
-          starCount: rating
-        });
-      }
     render() {
         console.log(this.props,"props")
         let { popularData } = this.state
         return (
-            <Container>
-                <Content style={{paddingTop: 24,backgroundColor: '#eee'}}>
-                    <View style={styles.searchBox}>
-                        <View style={styles.search}>
-                            <Image source={require('../img/search.jpg')} />
+            <Container >
+                <Content contentContainerStyle={{flex: 1,backgroundColor: '#eee'}}>
+                    <View style={{flex: 1}}>
+                        <View style={{flex: 1,backgroundColor: '#2585ee',justifyContent: 'center',alignItems: 'center'}}>
+                            <View style={{height: 60,width: 60,borderRadius: 30,overflow: 'hidden'}}>
+                                <Image source={require('../img/user.jpeg')} style={styles.imageStyle}/>
+                            </View>
+                            <Text style={{fontSize: 26,color: '#fff'}}>Markus Vans</Text>
+                            <Text style={{fontSize: 14,color: '#fff'}}>80 PTS</Text>
                         </View>
-                        <TextInput placeholder="Search your journey" placeholderTextColor="#bbb" style={styles.textInput}/>
-                        <View style={styles.filterIcon}>
-                            <TouchableOpacity>
-                                <Icons name="sort-amount-asc" color ='#bbb' size={20}/>
-                            </TouchableOpacity>
+                        <View style={{flex: 2,marginTop: -40}}>
+                            <ScrollView>
+                                <View style={{flexWrap: 'wrap',flexDirection: 'row',justifyContent: 'space-around',alignItems: 'center'}}>
+                                    {popularData.map((item,key) => {
+                                        return(
+                                            <TouchableOpacity style={{width: width/2 - 20, height: width/2 - 40,backgroundColor: '#fff',borderRadius: 5,marginBottom: 20,alignItems: 'center',justifyContent: 'center',elevation: 2}} key={key} activeOpacity={0.9}>
+                                                <Icons name={item.img} color ='#bbb' size={35}/>
+                                                <Text style={{fontSize: 14,marginTop: 10,color: '#000'}}>{item.heading}</Text>
+                                            </TouchableOpacity>
+                                        )
+                                    })}
+                                    
+                                </View>
+                            </ScrollView>
                         </View>
-                    </View>
-                    <View style={styles.headingView}>
-                        <Text style={styles.heading}>Popular</Text>
-                        <TouchableOpacity style={styles.rightMore}><Text style={styles.rightMoreText}>More</Text></TouchableOpacity>
-                    </View>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={styles.mainCon}>
-                            {popularData.map((item,key) => {
-                                return(
-                                    <View style={styles.mainView} key={key}>
-                                        <Image source={item.img} style={styles.imageStyle}/>
-                                        <Text style={styles.texthead}>{item.heading}</Text>
-                                        <View style={styles.textUsdCon}>
-                                            <Text style={styles.textUsd}>USD 5300.00</Text>
-                                            <Text style={[styles.textUsd,{marginLeft: 10}]}>10DAYS</Text>
-                                        </View>
-                                    </View>
-                                )
-                            })}
-                        </View>
-                    </ScrollView>
-                    <View style={styles.headingView}>
-                        <Text style={styles.heading}>Activity</Text>
-                        <TouchableOpacity style={styles.rightMore}><Text style={styles.rightMoreText}>More</Text></TouchableOpacity>
-                    </View>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={styles.mainCon}>
-                            {
-                                popularData.map((item, key) => {
-                                    return(
-                                        <View style={[styles.mainView,{width: 200,height: 120}]} key={key}>
-                                            <Image source={item.img} style={styles.imageStyle}/>
-                                            <Text style={styles.activityHead}>AURORA</Text>
-                                            <View style={[styles.textActivityCon]}>
-                                                <Text style={styles.textUsd}>USD 5300.00</Text>
-                                                <Text style={[styles.textUsd,{marginLeft: 10}]}>10DAYS</Text>
-                                            </View>
-                                        </View>
-                                    )
-                                })
-                            }
-                        </View>
-                    </ScrollView>
-                    <View style={{marginBottom: 25}}>
-                        <View style={styles.headingView}>
-                            <Text style={styles.heading}>Recommended</Text>
-                        </View>
-                        {
-                            popularData.map((item, key) => {
-                                return(
-                                    <View style={styles.mainList} key={key}>
-                                        <View style={styles.imageOuter}>
-                                            <Image source={item.img} style={styles.imageStyle}/>
-                                        </View>
-                                        <View style={styles.rightList}>
-                                            <Text style={styles.tripFrance}>Romantic trip to France</Text>
-                                            <View style={styles.usdTextActivity}>
-                                                <Text style={styles.usdTextAct}>USD 5300.00</Text>
-                                                <Text style={styles.usdTextActText}>10DAYS</Text>
-                                            </View>
-                                            <StarRating
-                                                maxStars={5}
-                                                rating={this.state.starCount}
-                                                selectedStar={(rating) => this.onStarRatingPress(rating)}
-                                                fullStarColor={'orange'}
-                                                starSize={12}
-                                                containerStyle={{width: 70}}
-                                                disabled={true}
-                                            />
-                                        </View>
-                                    </View>
-                                )
-                            })
-                        }
                     </View>
                 </Content>
             </Container>
